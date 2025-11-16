@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import '../../features/memo/domain/models/memo.dart';
-import '../../features/memo/domain/models/mood.dart';
+import 'package:memomemo/core/domain/memo.dart';
+import 'package:memomemo/core/domain/mood.dart';
 import '../storage/memo_repository.dart';
 
 /// `MemoNotifier` はメモ一覧のインメモリ状態を保持し、UI に通知を

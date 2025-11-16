@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
-import '../../features/memo/domain/models/memo.dart';
-import '../../features/memo/domain/models/mood.dart';
+import 'package:memomemo/core/domain/memo.dart';
+import 'package:memomemo/core/domain/mood.dart';
 
 class MemoRepository {
   static const _kKey = 'memos_v1';

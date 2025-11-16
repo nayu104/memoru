@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app_theme.dart';
-import 'package:memomemo/features/memo/ui/screens/memo_list_screen.dart';
+import 'package:memomemo/features/screens/memo_list_screen.dart';
 import 'storage/memo_repository.dart';
 import 'state/memo_notifier.dart';
 
