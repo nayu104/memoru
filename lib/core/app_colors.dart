@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // ベースカラー
-  static const seed = Color(0xFF6A4CFF);
+  static const seed = Color.fromRGBO(254, 255, 173, 0.847);
 
   // 背景
   static const scaffold = Color(0xFFFDF6F8);
 
   // FAB
-  static const fab = Color(0xFFCEB3FF);
+  static const fab = Color.fromARGB(255, 217, 223, 188);
 
   // 気分メモ用（例）
   static const moodHappy = Color(0xFFFFD54F);

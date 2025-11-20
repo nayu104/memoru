@@ -83,7 +83,6 @@ class MemoListScreen extends StatelessWidget {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () => _openNewMemo(context),
-        backgroundColor: Colors.white,
         child: const Icon(Icons.add, color: Colors.blue),
       ),
     );
