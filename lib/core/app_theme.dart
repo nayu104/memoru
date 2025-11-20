@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'app_colors.dart';
 
 final ThemeData appTheme = ThemeData(
   useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-  scaffoldBackgroundColor: const Color(0xFFFDF6F8),
+  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.seed),
+  scaffoldBackgroundColor: AppColors.scaffold,
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: Color(0xFFCEB3FF),
+    backgroundColor: AppColors.fab,
+  ),
+  textTheme: const TextTheme().apply(
+    bodyColor: AppColors.textMain,
+    displayColor: AppColors.textMain,
   ),
 );
