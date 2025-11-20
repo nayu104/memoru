@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import '../widgets/memo_card.dart';
 import '../../../../core/state/memo_notifier.dart';
 import '../widgets/new_memo_modal.dart';
-import '../widgets/contact_url.dart';
+
+import 'setting_screen.dart';
 
 class MemoListScreen extends StatelessWidget {
   const MemoListScreen({super.key});
@@ -14,24 +15,22 @@ class MemoListScreen extends StatelessWidget {
     final items = notifier.items;
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('気分でメモメモ'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => SettingScreen()));
+            },
+            icon: Icon(Icons.settings, color: Colors.black),
+          ),
+        ],
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SafeArea(
-            child: Row(
-              children: [
-                SizedBox(width: 16),
-                Text(
-                  'メモ一覧',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                //   Image.asset('assets/images/logo.png', width: 2, height: 2),
-                Spacer(),
-                const ContactUrl(),
-                SizedBox(width: 16),
-              ],
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Container(
@@ -50,7 +49,6 @@ class MemoListScreen extends StatelessWidget {
 
           // Content
           Expanded(
-            // ここだけ差し替え
             child: Stack(
               children: [
                 // 背景画像（常に表示）
@@ -65,9 +63,7 @@ class MemoListScreen extends StatelessWidget {
                 if (notifier.loading)
                   const Center(child: CircularProgressIndicator())
                 else if (items.isEmpty)
-                  const Center(
-                    child: Text('まだメモがありません'), // 好きな文言に変えていい
-                  )
+                  const Center(child: Text('まだメモがありません'))
                 else
                   ListView.separated(
                     padding: const EdgeInsets.symmetric(

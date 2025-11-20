@@ -86,12 +86,12 @@ class MemoCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Text(
-                      memo.body,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Colors.black54),
-                    ),
+                    // Text(
+                    //   memo.body,
+                    //   maxLines: 1,
+                    //   overflow: TextOverflow.ellipsis,
+                    //   style: const TextStyle(color: Colors.black54),
+                    // ),
                   ],
                 ),
               ),
