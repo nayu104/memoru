@@ -1,0 +1,43 @@
+name: Flutter CI
+
+# トリガー: mainブランチへのpush、またはプルリクエスト作成時
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # Ubuntuが一番起動が早く、無料枠の消費も少ない
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. コードをチェックアウト
+      - uses: actions/checkout@v4
+
+      # 2. Flutter環境のセットアップ
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true # キャッシュ有効化で高速化
+
+      # 3. パッケージインストール
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 4. 【重要】コード生成 (これがないとFreezed/Riverpodがエラーになる)
+      - name: Run build_runner
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      # 5. 静的解析 (バグの温床を検知)
+      - name: Analyze
+        run: flutter analyze
+
+      # 6. フォーマットチェック (コードスタイルが崩れていないか)
+      - name: Check format
+        run: dart format --output=none --set-exit-if-changed .
+
+      # 7. テスト実行 (テストコードがあれば)
+      - name: Run tests
+        run: flutter test
