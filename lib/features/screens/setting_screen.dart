@@ -4,6 +4,7 @@ import 'package:memomemo/core/constants/app_urls.dart';
 //import 'package:memomemo/core/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memomemo/core/provider/memo_state.dart';
+import 'package:memomemo/crashlytics.dart';
 
 class SettingScreen extends ConsumerWidget {
   const SettingScreen({super.key});
@@ -123,6 +124,15 @@ class SettingScreen extends ConsumerWidget {
             icon: Icons.privacy_tip,
             title: 'プライバシーポリシー',
             onTap: () {},
+          ),
+          _buildSettingTile(
+            context: context,
+            icon: Icons.privacy_tip,
+            title: 'クラッシュテスト',
+            onTap: () {
+              CrashlyticsHandler.log('ログ');
+              CrashlyticsHandler.crash('クラッシュテスト');
+            },
           ),
           _buildSettingTile(
             context: context,

@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // 必須
-import 'package:shared_preferences/shared_preferences.dart'; // 必須
-import 'core/app.dart'; // MemoMemoAppの場所
-import 'core/data/memo_repository.dart'; // リポジトリの場所
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'core/app.dart';
+import 'core/data/memo_repository.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'firebase_options.dart';
+import 'crashlytics.dart';
 
 void main() async {
-  // 1. Flutterエンジンの初期化 (非同期処理を使う前に必須)
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 2. データの保存場所 (SharedPreferences) を準備
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await CrashlyticsHandler.setup();
+
+  //  データの保存場所 (SharedPreferences) を準備
   final prefs = await SharedPreferences.getInstance();
 
-  // 3. アプリ起動
   runApp(
     ProviderScope(
       overrides: [

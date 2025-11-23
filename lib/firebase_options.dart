@@ -24,10 +24,11 @@ class DefaultFirebaseOptions {
         return android;
       case TargetPlatform.iOS:
         return ios;
-      case TargetPlatform.macOS:
-        return macos;
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -65,24 +66,5 @@ class DefaultFirebaseOptions {
     projectId: 'memomemo-a4659',
     storageBucket: 'memomemo-a4659.firebasestorage.app',
     iosBundleId: 'com.example.memomemo',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBNXRlfVblBsQl368awCeWrdX22nm-9wz8',
-    appId: '1:1030457040174:ios:6f581061c3ec673566eebf',
-    messagingSenderId: '1030457040174',
-    projectId: 'memomemo-a4659',
-    storageBucket: 'memomemo-a4659.firebasestorage.app',
-    iosBundleId: 'com.example.memomemo',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBm4JphBtr5H8raWvqSLaHzB9pWkd4XuHI',
-    appId: '1:1030457040174:web:9c1a1889d72f24b466eebf',
-    messagingSenderId: '1030457040174',
-    projectId: 'memomemo-a4659',
-    authDomain: 'memomemo-a4659.firebaseapp.com',
-    storageBucket: 'memomemo-a4659.firebasestorage.app',
-    measurementId: 'G-PPKV4VNWNL',
   );
 }
