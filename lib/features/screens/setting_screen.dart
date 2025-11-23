@@ -130,8 +130,8 @@ class SettingScreen extends ConsumerWidget {
             icon: Icons.privacy_tip,
             title: 'クラッシュテスト',
             onTap: () {
-              CrashlyticsHandler.log('ログ');
-              CrashlyticsHandler.crash('クラッシュテスト');
+              Crashlytics.log('ログ');
+              Crashlytics.crash('クラッシュテスト');
             },
           ),
           _buildSettingTile(

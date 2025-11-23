@@ -5,7 +5,6 @@ import 'core/app.dart';
 import 'core/data/memo_repository.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'firebase_options.dart';
 import 'crashlytics.dart';
 
@@ -14,7 +13,7 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await CrashlyticsHandler.setup();
+  await Crashlytics.setup();
 
   //  データの保存場所 (SharedPreferences) を準備
   final prefs = await SharedPreferences.getInstance();
