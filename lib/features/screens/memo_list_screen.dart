@@ -85,7 +85,6 @@ class MemoListScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _openNewMemo(context),
         child: const Icon(Icons.add, color: Colors.white), // アイコン白の方が見やすいかも
-        backgroundColor: Colors.blue,
       ),
     );
   }
