@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:memomemo/gen/assets.gen.dart';
 import 'memo_list_screen.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final bool fromSettings;
@@ -46,17 +46,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<Map<String, String>> onboardingData = [
     {
-      "image": "assets/images/onboarding1.png",
+      "image": Assets.images.onbPage01.path,
       "title": "今の気分を記録しよう",
       "description": "嬉しい、悲しい、おだやか...\nその瞬間の感情をスタンプで残せます。",
     },
     {
-      "image": "assets/images/onboarding2.png",
+      "image": Assets.images.onbPage02.path,
       "title": "シンプルなメモ",
       "description": "思いついたことをサッと書き留める。\n余計な機能はない、あなただけの場所。",
     },
     {
-      "image": "assets/images/onboarding3.png",
+      "image": Assets.images.onbPage03.path,
       "title": "この子はあなたの相棒",
       "description": "名前はメモルちゃん\n背景であなたを見守っています。",
     },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memomemo/gen/assets.gen.dart';
 import '../../core/provider/memo_state.dart';
 import '../widgets/memo_card.dart';
 import 'new_memo_modal.dart';
@@ -54,7 +55,7 @@ class MemoListScreen extends ConsumerWidget {
                 Positioned.fill(
                   child: Opacity(
                     opacity: 0.15,
-                    child: Image.asset('assets/images/memomemo.png'),
+                    child: Assets.images.memomemo.image(),
                   ),
                 ),
 
