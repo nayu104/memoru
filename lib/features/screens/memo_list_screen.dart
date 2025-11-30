@@ -7,11 +7,29 @@ import '../widgets/memo_card.dart';
 import 'new_memo_modal.dart';
 import 'setting_screen.dart';
 
-class MemoListScreen extends ConsumerWidget {
+class MemoListScreen extends ConsumerStatefulWidget {
   const MemoListScreen({super.key});
+  @override
+  ConsumerState<MemoListScreen> createState() => _MemoListScreenState();
+}
+
+class _MemoListScreenState extends ConsumerState<MemoListScreen> {
+  late final TextEditingController _searchController;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // Riverpodの状態監視 (AsyncValue<List<Memo>>)
     final asyncMemos = ref.watch(memoNotifierProvider);
     final searchQuery = ref.watch(searchQueryProvider);
@@ -42,6 +60,15 @@ class MemoListScreen extends ConsumerWidget {
                 prefixIcon: const Icon(Icons.search, color: Colors.black38),
                 hintText: 'けんさく',
                 hintStyle: const TextStyle(color: Colors.black38),
+                suffixIcon: searchQuery.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          ref.read(searchQueryProvider.notifier).state = '';
+                          _searchController.clear();
+                        },
+                      )
+                    : null,
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
@@ -49,6 +76,9 @@ class MemoListScreen extends ConsumerWidget {
                   borderSide: BorderSide.none,
                 ),
               ),
+              onChanged: (value) {
+                ref.read(searchQueryProvider.notifier).state = value;
+              },
             ),
           ),
           const SizedBox(height: 12),
