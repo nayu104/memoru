@@ -16,7 +16,7 @@ class MemoListScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('気分でメモメモ'),
+        title: const Text('気分でメモル'),
         actions: [
           IconButton(
             tooltip: '設定画面を開くボタン',
@@ -64,7 +64,27 @@ class MemoListScreen extends ConsumerWidget {
                 asyncMemos.when(
                   data: (items) {
                     if (items.isEmpty) {
-                      return const Center(child: Text('まだメモがありません'));
+                      return const Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'メモルちゃんがメモを欲しそうに...',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                            ),
+                            Text(
+                              'さっそくメモを作成しましょう！',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
                     }
                     return ListView.separated(
                       padding: const EdgeInsets.symmetric(
