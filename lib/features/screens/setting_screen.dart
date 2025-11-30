@@ -129,9 +129,7 @@ class SettingScreen extends ConsumerWidget {
             context: context,
             icon: Icons.star_rate,
             title: 'レビューを書く',
-            onTap: () {
-              // TODO: 実装
-            },
+            onTap: () {},
           ),
           const Divider(),
 
