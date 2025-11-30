@@ -98,6 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                       onboardingData.length,
                       (index) => Container(
