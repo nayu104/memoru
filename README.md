@@ -17,3 +17,10 @@ https://memomemo-a4659.web.app
 <img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 33 38" src="https://github.com/user-attachments/assets/c5dea502-44d1-41e0-92e3-748281fa8d7b" />
 <img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 33 44" src="https://github.com/user-attachments/assets/b383f0c2-3d9f-43aa-b3c7-3003e667a2b0" />
 <img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 33 51" src="https://github.com/user-attachments/assets/5b06c091-90b2-4406-94f3-b87da847c0ff" />
+
+
+## 基本画面
+<img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 34 58" src="https://github.com/user-attachments/assets/b7d49fff-60d7-44e9-ae59-e889fcce3db6" />
+<img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 35 29" src="https://github.com/user-attachments/assets/aea9143b-496d-4f97-80df-8e65ea912627" />
+<img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 35 48" src="https://github.com/user-attachments/assets/28a62687-17a5-4511-a337-eeabc52d22df" />
+<img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 35 55" src="https://github.com/user-attachments/assets/1f58b788-ac3b-4438-95f8-ce30bb9b923a" />
