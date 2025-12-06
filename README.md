@@ -5,6 +5,8 @@
 - デモ: https://memomemo-a4659.web.app
 - お問い合わせ・ご要望はこちら
   - https://docs.google.com/forms/d/e/1FAIpQLSeSaK47aha1UtVZdAKEACvY45e4Wi1ERmFrGpArUZSqt9-P8A/viewform?usp=dialog
+ 
+  
 | 実装したい機能    | 使うべきFirebaseのサービス             | 難易度 | コスト  |
 | ---------- | ----------------------------- | --- | ---- |
 | 季節ごとのUI変更  | Firebase Remote Config        | 低   | 無料   |
