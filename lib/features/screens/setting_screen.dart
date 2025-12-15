@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:memomemo/core/constants/app_urls.dart';
-//import 'package:memomemo/core/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memomemo/core/provider/memo_state.dart';
 import 'package:memomemo/crashlytics.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'onboarding_screen.dart';
 
-class SettingScreen extends ConsumerWidget {
+class SettingScreen extends ConsumerStatefulWidget {
   const SettingScreen({super.key});
+  @override
+  ConsumerState<SettingScreen> createState() => _SettingScreenState();
+}
+
+class _SettingScreenState extends ConsumerState<SettingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAnalytics.instance.logScreenView(screenName: 'SettingScreen');
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    //  final theme = Theme.of(context);
-    // final colorScheme = theme.colorScheme;
-
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('設定'),
