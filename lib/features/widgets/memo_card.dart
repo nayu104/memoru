@@ -36,6 +36,7 @@ class MemoCard extends ConsumerWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: const Text('メモを削除しました'),
+              duration: const Duration(seconds: 3),
               action: SnackBarAction(
                 label: '元に戻す',
                 onPressed: () {
