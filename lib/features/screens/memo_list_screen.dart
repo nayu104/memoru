@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memomemo/gen/assets.gen.dart';
 import '../../core/provider/memo_state.dart';
 import '../../core/provider/search_state.dart';
+import '../../core/widgets/skeleton_container.dart';
 import '../widgets/memo_card.dart';
 import 'new_memo_modal.dart';
 import 'setting_screen.dart';
@@ -145,8 +146,19 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
                   },
                   error: (err, stack) =>
                       Center(child: Text('エラーが発生しました: $err')),
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
+                  loading: () => ListView.separated(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    itemCount: 6,
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (_, __) => const SkeletonContainer(
+                      width: double.infinity,
+                      height: 80,
+                      borderRadius: 12,
+                    ),
+                  ),
                 ),
               ],
             ),
