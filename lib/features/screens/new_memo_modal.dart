@@ -16,6 +16,7 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
   Mood _selected = Mood.calm;
   final TextEditingController _controller = TextEditingController();
 
+  // メモ編集画面が開かれた瞬間に、既存のメモデータを画面にセットする
   @override
   void initState() {
     super.initState();
@@ -34,7 +35,40 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
       appBar: AppBar(
         leadingWidth: 100,
         leading: TextButton(
-          onPressed: () => navigator.pop(),
+          onPressed: () async {
+            // テキストが入力されている場合のみ確認ダイアログを表示
+            if (_controller.text.trim().isNotEmpty) {
+              final shouldDiscard = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('編集内容を破棄'),
+                  content: const Text('入力した内容は保存されません。\n破棄してもよろしいですか？'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, false),
+                      child: const Text('キャンセル'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      child: Text(
+                        '破棄',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+
+              // 「破棄」が選ばれなかった場合は何もしない
+              if (shouldDiscard != true) return;
+            }
+
+            if (context.mounted) {
+              navigator.pop();
+            }
+          },
           child: const Text('キャンセル'),
         ),
         actions: [
@@ -82,13 +116,15 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
             Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: Mood.values.map((m) {
-                final selected = m == _selected;
+              children: Mood.values.map((mood) {
+                final isSelected = mood == _selected;
+                final selectedColor = mood.color.withAlpha(200);
+
                 return ChoiceChip(
-                  label: Text('${m.emoji} ${m.label}'),
-                  selected: selected, // ここで選択状態を指定
-                  onSelected: (_) => setState(() => _selected = m),
-                  selectedColor: m.color.withAlpha(200), // ここで色を変える
+                  label: Text('${mood.emoji} ${mood.label}'),
+                  selected: isSelected,
+                  onSelected: (_) => setState(() => _selected = mood),
+                  selectedColor: selectedColor,
                   backgroundColor: Colors.white,
                 );
               }).toList(),
