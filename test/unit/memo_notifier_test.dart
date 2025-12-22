@@ -91,10 +91,7 @@ void main() {
     final originalMemo = container.read(memoNotifierProvider).value!.first;
 
     // 2. 更新用のオブジェクト作成
-    final updatedMemo = originalMemo.copyWith(
-      body: '新しいメモ',
-      mood: Mood.happy,
-    );
+    final updatedMemo = originalMemo.copyWith(body: '新しいメモ', mood: Mood.happy);
 
     // 3. 更新実行
     await notifier.updateMemo(updatedMemo);

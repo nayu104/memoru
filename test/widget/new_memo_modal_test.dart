@@ -31,12 +31,8 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [
-          memoNotifierProvider.overrideWith(() => spyNotifier),
-        ],
-        child: const MaterialApp(
-          home: NewMemoModal(),
-        ),
+        overrides: [memoNotifierProvider.overrideWith(() => spyNotifier)],
+        child: const MaterialApp(home: NewMemoModal()),
       ),
     );
 
@@ -60,11 +56,7 @@ void main() {
 
   testWidgets('完了ボタンでキーボードが閉じること', (WidgetTester tester) async {
     await tester.pumpWidget(
-      const ProviderScope(
-        child: MaterialApp(
-          home: NewMemoModal(),
-        ),
-      ),
+      const ProviderScope(child: MaterialApp(home: NewMemoModal())),
     );
 
     // テキストフィールドをタップしてフォーカス
@@ -77,7 +69,7 @@ void main() {
     // Instead, we check if the focus node has focus.
     // But TextField creates its own FocusNode if not provided.
     // Let's just check if tapping "完了" doesn't crash and maybe check if we are still on the same page.
-    
+
     await tester.tap(find.text('完了'));
     await tester.pump();
 

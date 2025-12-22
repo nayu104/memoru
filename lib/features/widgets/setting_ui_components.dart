@@ -43,10 +43,7 @@ class SettingTile extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return ListTile(
-      leading: Icon(
-        icon,
-        color: colorScheme.onSurface,
-      ),
+      leading: Icon(icon, color: colorScheme.onSurface),
       title: Text(
         title,
         style: theme.textTheme.bodyLarge?.copyWith(
@@ -61,10 +58,7 @@ class SettingTile extends StatelessWidget {
               ),
             )
           : null,
-      trailing: Icon(
-        Icons.chevron_right,
-        color: colorScheme.onSurfaceVariant,
-      ),
+      trailing: Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant),
       onTap: onTap,
     );
   }

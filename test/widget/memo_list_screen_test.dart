@@ -41,9 +41,7 @@ void main() {
         overrides: [
           memoNotifierProvider.overrideWith(() => FakeMemoNotifier(memos)),
         ],
-        child: const MaterialApp(
-          home: MemoListScreen(),
-        ),
+        child: const MaterialApp(home: MemoListScreen()),
       ),
     );
 
@@ -77,9 +75,7 @@ void main() {
         overrides: [
           memoNotifierProvider.overrideWith(() => FakeMemoNotifier(memos)),
         ],
-        child: const MaterialApp(
-          home: MemoListScreen(),
-        ),
+        child: const MaterialApp(home: MemoListScreen()),
       ),
     );
 
@@ -90,7 +86,10 @@ void main() {
     await tester.pumpAndSettle();
 
     // りんごは表示され、ばななは表示されない
-    expect(find.descendant(of: find.byType(MemoCard), matching: find.text('りんご')), findsOneWidget);
+    expect(
+      find.descendant(of: find.byType(MemoCard), matching: find.text('りんご')),
+      findsOneWidget,
+    );
     expect(find.text('ばなな'), findsNothing);
   });
 }

@@ -62,11 +62,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
               }
             },
           ),
-          SettingTile(
-            icon: Icons.star_rate,
-            title: 'レビューを書く',
-            onTap: () {},
-          ),
+          SettingTile(icon: Icons.star_rate, title: 'レビューを書く', onTap: () {}),
           const Divider(),
 
           // ── アプリ情報 ─────────────────────────────
@@ -78,11 +74,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
               const OnboardingRoute(fromSettings: true).push(context);
             },
           ),
-          SettingTile(
-            icon: Icons.description,
-            title: '利用規約',
-            onTap: () {},
-          ),
+          SettingTile(icon: Icons.description, title: '利用規約', onTap: () {}),
           SettingTile(
             icon: Icons.privacy_tip,
             title: 'プライバシーポリシー',
