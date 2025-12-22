@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-//import 'package:memomemo/core/domain/memo.dart';
+import 'package:memomemo/core/data/memo_repository.dart';
 import 'package:memomemo/core/domain/mood.dart';
 import 'package:memomemo/core/provider/memo_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,19 +12,29 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  test('初期状態は空であること', () {
-    final container = ProviderContainer();
+  test('初期状態は空であること', () async {
+    final prefs = await SharedPreferences.getInstance();
+    final container = ProviderContainer(
+      overrides: [
+        memoRepositoryProvider.overrideWithValue(MemoRepository(prefs)),
+      ],
+    );
     addTearDown(container.dispose);
 
     // プロバイダーの状態を読み込む
-    final state = container.read(memoNotifierProvider);
+    final memos = await container.read(memoNotifierProvider.future);
 
     // AsyncValue.data([]) であることを確認
-    expect(state.value, isEmpty);
+    expect(memos, isEmpty);
   });
 
   test('メモを追加できること', () async {
-    final container = ProviderContainer();
+    final prefs = await SharedPreferences.getInstance();
+    final container = ProviderContainer(
+      overrides: [
+        memoRepositoryProvider.overrideWithValue(MemoRepository(prefs)),
+      ],
+    );
     addTearDown(container.dispose);
 
     final notifier = container.read(memoNotifierProvider.notifier);
@@ -45,7 +55,12 @@ void main() {
   });
 
   test('メモを削除できること', () async {
-    final container = ProviderContainer();
+    final prefs = await SharedPreferences.getInstance();
+    final container = ProviderContainer(
+      overrides: [
+        memoRepositoryProvider.overrideWithValue(MemoRepository(prefs)),
+      ],
+    );
     addTearDown(container.dispose);
     final notifier = container.read(memoNotifierProvider.notifier);
 
@@ -59,5 +74,36 @@ void main() {
     // 空になっているか確認
     final state = container.read(memoNotifierProvider);
     expect(state.value, isEmpty);
+  });
+
+  test('メモを更新できること', () async {
+    final prefs = await SharedPreferences.getInstance();
+    final container = ProviderContainer(
+      overrides: [
+        memoRepositoryProvider.overrideWithValue(MemoRepository(prefs)),
+      ],
+    );
+    addTearDown(container.dispose);
+    final notifier = container.read(memoNotifierProvider.notifier);
+
+    // 1. 追加
+    await notifier.add(body: '古いメモ', mood: Mood.tired);
+    final originalMemo = container.read(memoNotifierProvider).value!.first;
+
+    // 2. 更新用のオブジェクト作成
+    final updatedMemo = originalMemo.copyWith(
+      body: '新しいメモ',
+      mood: Mood.happy,
+    );
+
+    // 3. 更新実行
+    await notifier.updateMemo(updatedMemo);
+
+    // 4. 検証
+    final state = container.read(memoNotifierProvider);
+    final currentMemo = state.value!.first;
+    expect(currentMemo.body, '新しいメモ');
+    expect(currentMemo.mood, Mood.happy);
+    expect(currentMemo.id, originalMemo.id); // IDは変わっていないはず
   });
 }

@@ -6,6 +6,11 @@ import 'package:memomemo/core/provider/app_info_provider.dart';
 
 void main() {
   testWidgets('😄初回起動時はオンボーディングが表示されること', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     // Build our app and trigger a frame.
     await tester.pumpWidget(
       ProviderScope(
