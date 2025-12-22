@@ -16,6 +16,8 @@ class MemoListScreen extends ConsumerStatefulWidget {
 class _MemoListScreenState extends ConsumerState<MemoListScreen> {
   late final TextEditingController _searchController;
 
+  bool _isFabPressed = false;
+
   @override
   void initState() {
     super.initState();
@@ -151,10 +153,27 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: '新しいメモを作成するボタン',
-        onPressed: () => _openNewMemo(context),
-        child: const Icon(Icons.add, color: Colors.white), // アイコン白の方が見やすいかも
+      floatingActionButton: Listener(
+        onPointerDown: (_) => setState(() => _isFabPressed = true),
+        onPointerUp: (_) {
+          setState(() => _isFabPressed = false);
+          // 指を離したタイミングで画面遷移
+          _openNewMemo(context);
+        },
+        onPointerCancel: (_) => setState(() => _isFabPressed = false),
+        child: AnimatedScale(
+          scale: _isFabPressed ? 0.7 : 1.0, // 押すと0.7倍に縮む
+          duration: const Duration(milliseconds: 200),
+          child: FloatingActionButton(
+            tooltip: '新しいメモを作成するボタン',
+            // Listenerでタップを検知するのでonPressedはnullにするが、
+            // 色が変わらないようにbackgroundColorを明示的に指定
+            onPressed: null,
+            backgroundColor: Theme.of(context).primaryColor,
+            elevation: _isFabPressed ? 2 : 6, // 押した時に影も少し小さくする
+            child: const Icon(Icons.add, color: Colors.white),
+          ),
+        ),
       ),
     );
   }

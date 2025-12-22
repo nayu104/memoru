@@ -45,6 +45,7 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
 
               final notifier = ref.read(memoNotifierProvider.notifier);
 
+              // TODO: 早期リターンの検討＋
               if (widget.initial == null) {
                 await notifier.add(body: text, mood: _selected);
               } else {
