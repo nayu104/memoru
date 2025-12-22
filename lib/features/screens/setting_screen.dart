@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:memomemo/core/constants/app_urls.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memomemo/core/provider/memo_state.dart';
 import 'package:memomemo/crashlytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'onboarding_screen.dart';
+import '../../core/router/app_router.dart';
 
 class SettingScreen extends ConsumerStatefulWidget {
   const SettingScreen({super.key});
@@ -28,7 +29,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         leading: IconButton(
           tooltip: '設定画面を閉じるボタン',
           icon: Icon(Icons.arrow_back_ios),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
       ),
       body: ListView(
@@ -79,11 +80,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             icon: Icons.help_outline,
             title: '使い方を見る',
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const OnboardingScreen(fromSettings: true),
-                ),
-              );
+              const OnboardingRoute(fromSettings: true).push(context);
             },
           ),
           _buildSettingTile(
@@ -160,12 +157,12 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         actions: [
           TextButton(
             // キャンセルなら false を返して閉じる
-            onPressed: () => Navigator.pop(dialogContext, false),
+            onPressed: () => context.pop(false),
             child: const Text('キャンセル'),
           ),
           TextButton(
             // 削除なら true を返して閉じる
-            onPressed: () => Navigator.pop(dialogContext, true),
+            onPressed: () => context.pop(true),
             child: Text(
               '削除',
               style: TextStyle(color: Theme.of(context).colorScheme.error),
