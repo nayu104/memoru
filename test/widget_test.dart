@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:memomemo/core/app.dart';
+import 'package:memomemo/core/provider/app_info_provider.dart';
 
 void main() {
   testWidgets('😄初回起動時はオンボーディングが表示されること', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      const ProviderScope(child: MemoMemoApp(isFirstLaunch: true)),
+      ProviderScope(
+        overrides: [isFirstLaunchProvider.overrideWithValue(true)],
+        child: const MemoMemoApp(),
+      ),
     );
 
     // 描画を待つ
@@ -24,7 +28,10 @@ void main() {
   testWidgets('2回目以降はメモ一覧が表示されること', (WidgetTester tester) async {
     // 1. アプリをビルド（isFirstLaunch: false を渡す）
     await tester.pumpWidget(
-      const ProviderScope(child: MemoMemoApp(isFirstLaunch: false)),
+      ProviderScope(
+        overrides: [isFirstLaunchProvider.overrideWithValue(false)],
+        child: const MemoMemoApp(),
+      ),
     );
 
     await tester.pumpAndSettle();
