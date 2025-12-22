@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/app.dart';
 import 'core/data/memo_repository.dart';
+import 'core/provider/app_info_provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -23,8 +24,9 @@ void main() async {
       overrides: [
         // ここで「準備完了したリポジトリ」をアプリ全体に配る
         memoRepositoryProvider.overrideWithValue(MemoRepository(prefs)),
+        isFirstLaunchProvider.overrideWithValue(isFirstLaunch),
       ],
-      child: MemoMemoApp(isFirstLaunch: isFirstLaunch),
+      child: const MemoMemoApp(),
     ),
   );
 }

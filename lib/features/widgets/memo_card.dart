@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memomemo/core/domain/memo.dart';
 import 'package:memomemo/core/domain/mood.dart';
+import '../../core/router/app_router.dart';
 import '../../core/provider/memo_state.dart';
-import '../screens/new_memo_modal.dart';
 import '../../core/app_colors.dart';
 
 class MemoCard extends ConsumerWidget {
@@ -51,12 +51,7 @@ class MemoCard extends ConsumerWidget {
         // ここでテーマ(app_theme.dart)の設定が勝手に適用される
         clipBehavior: Clip.antiAlias, // タップ時の波紋を角丸からはみ出させない設定
         child: InkWell(
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (_) => NewMemoModal(initial: memo),
-            ),
-          ),
+          onTap: () => NewMemoRoute($extra: memo).push(context),
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Row(

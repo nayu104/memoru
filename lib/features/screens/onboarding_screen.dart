@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:memomemo/gen/assets.gen.dart';
-import 'memo_list_screen.dart';
+import '../../core/router/app_router.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final bool fromSettings;
@@ -31,7 +32,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _finishOnboarding() async {
     if (widget.fromSettings) {
       // 設定画面から来た場合は単に閉じる
-      Navigator.of(context).pop();
+      context.pop();
       return;
     }
 
@@ -39,9 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     await prefs.setBool('isFirstLaunch', false);
 
     if (!mounted) return;
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const MemoListScreen()),
-    );
+    const MemoListRoute().go(context);
   }
 
   final List<Map<String, String>> onboardingData = [
