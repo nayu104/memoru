@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/app.dart';
 import 'core/data/memo_repository.dart';
 import 'core/provider/app_info_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'core/config/env.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -15,6 +17,12 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await Crashlytics.setup();
+
+  // Supabaseの初期化
+  await Supabase.initialize(
+    url: Environment.supabaseUrl,
+    anonKey: Environment.supabaseAnonKey,
+  );
 
   //  データの保存場所 (SharedPreferences) を準備
   final prefs = await SharedPreferences.getInstance();
