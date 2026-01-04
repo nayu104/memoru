@@ -6,6 +6,7 @@
 - 実行方法:
   - ステージング環境: make run-stg
   - 本番環境: make run-prod
+
 .envが必要
  ---
  
