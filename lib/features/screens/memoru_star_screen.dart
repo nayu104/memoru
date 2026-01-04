@@ -74,12 +74,12 @@ class MemoruStarScreen extends StatelessWidget {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.white.withOpacity(0.6),
+                        color: Colors.white.withValues(alpha: 0.6),
                         blurRadius: 40,
                         spreadRadius: 10,
                       ),
                       BoxShadow(
-                        color: const Color(0xFF8EC5FC).withOpacity(0.4),
+                        color: const Color(0xFF8EC5FC).withValues(alpha: 0.4),
                         blurRadius: 60,
                         spreadRadius: 20,
                         offset: const Offset(0, 20),
@@ -96,7 +96,7 @@ class MemoruStarScreen extends StatelessWidget {
                           width: 240,
                           height: 120,
                           decoration: BoxDecoration(
-                            color: Colors.deepPurple.withOpacity(0.1),
+                            color: Colors.deepPurple.withValues(alpha: 0.1),
                             borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(120),
                               bottomRight: Radius.circular(120),
@@ -161,7 +161,7 @@ class MemoruStarScreen extends StatelessWidget {
                             Text(
                               '降り積もった想い',
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.white.withValues(alpha: 0.9),
                                 fontSize: 12,
                               ),
                             ),
@@ -172,7 +172,7 @@ class MemoruStarScreen extends StatelessWidget {
                       Container(
                         width: 1,
                         height: 40,
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                       ),
                       // 右側：割合
                       Expanded(
@@ -227,15 +227,15 @@ class _GlassContainer extends StatelessWidget {
           child: Container(
             padding: padding,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(30),
               border: Border.all(
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withValues(alpha: 0.3),
                 width: 1,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 10,
                   spreadRadius: 0,
                 ),
@@ -273,7 +273,7 @@ class _MoodRatioRow extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
               fontSize: 12,
             ),
           ),
