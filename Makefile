@@ -1,6 +1,3 @@
-# デフォルトの実行（開発用など、よく使うものを設定）
-run: run-stg
-
 # 検証環境 (Staging) で実行
 # main_stg.dart を起動ファイルとして指定
 run-stg:
