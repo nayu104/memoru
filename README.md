@@ -1,6 +1,8 @@
 ## 気分屋専用のメモアプリ
 ### メモに気分を反映するだけのアプリ
-- 実行方法: make run
+- 実行方法:
+  - ステージング環境: make run-stg
+  - 本番環境: make run-prod
 - 依存関係取得: fvm flutter pub get
 - デモ: https://memomemo-a4659.web.app
 - [お問い合わせ・ご要望はこちら](https://docs.google.com/forms/d/e/1FAIpQLSeSaK47aha1UtVZdAKEACvY45e4Wi1ERmFrGpArUZSqt9-P8A/viewform?usp=dialog)
