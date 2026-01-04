@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/screens/memo_list_screen.dart';
+import '../../features/screens/memoru_star_screen.dart';
 import '../../features/screens/new_memo_modal.dart';
 import '../../features/screens/onboarding_screen.dart';
 import '../../features/screens/setting_screen.dart';
@@ -24,6 +25,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
   routes: [
     TypedGoRoute<SettingsRoute>(path: 'settings'),
     TypedGoRoute<NewMemoRoute>(path: 'new'),
+    TypedGoRoute<MemoruStarRoute>(path: 'star'),
   ],
 )
 class MemoListRoute extends GoRouteData with _$MemoListRoute {
@@ -53,6 +55,14 @@ class NewMemoRoute extends GoRouteData with _$NewMemoRoute {
         fullscreenDialog: true,
         child: NewMemoModal(initial: $extra),
       );
+}
+
+class MemoruStarRoute extends GoRouteData with _$MemoruStarRoute {
+  const MemoruStarRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const MemoruStarScreen();
 }
 
 @TypedGoRoute<OnboardingRoute>(path: '/onboarding')

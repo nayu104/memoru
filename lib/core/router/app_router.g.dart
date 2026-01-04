@@ -15,6 +15,7 @@ RouteBase get $memoListRoute => GoRouteData.$route(
   routes: [
     GoRouteData.$route(path: 'settings', factory: _$SettingsRoute._fromState),
     GoRouteData.$route(path: 'new', factory: _$NewMemoRoute._fromState),
+    GoRouteData.$route(path: 'star', factory: _$MemoruStarRoute._fromState),
   ],
 );
 
@@ -81,6 +82,27 @@ mixin _$NewMemoRoute on GoRouteData {
   @override
   void replace(BuildContext context) =>
       context.replace(location, extra: _self.$extra);
+}
+
+mixin _$MemoruStarRoute on GoRouteData {
+  static MemoruStarRoute _fromState(GoRouterState state) =>
+      const MemoruStarRoute();
+
+  @override
+  String get location => GoRouteData.$location('/star');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $onboardingRoute => GoRouteData.$route(

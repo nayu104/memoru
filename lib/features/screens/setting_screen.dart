@@ -36,7 +36,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
       body: ListView(
         children: [
           // ── データ設定 ─────────────────────────────
-          const SectionTitle(title: 'データ'),
+          const SectionTitle(title: 'データ / メモル星へ送られます'),
           SettingTile(
             icon: Icons.backup,
             title: 'バックアップ / 復元',

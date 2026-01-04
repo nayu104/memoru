@@ -41,6 +41,13 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
         title: const Text('気分でメモル'),
         actions: [
           IconButton(
+            tooltip: 'メモル星',
+            onPressed: () {
+              const MemoruStarRoute().go(context);
+            },
+            icon: const Icon(Icons.public), // 地球儀アイコンを使用
+          ),
+          IconButton(
             tooltip: '設定画面を開くボタン',
             onPressed: () {
               const SettingsRoute().go(context);
