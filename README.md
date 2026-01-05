@@ -7,6 +7,15 @@
   - ステージング環境: make run-stg
   - 本番環境: make run-prod
   - .envが必要
+ 
+  ```
+API_BASE_URL = ○○○○
+SUPABASE_URL_STG = ○○○○
+SUPABASE_KEY_STG = ○○○○
+SUPABASE_URL_PROD = ○○○○
+SUPABASE_KEY_PROD = ○○○○
+```
+
  ---
  
 - 依存関係取得: fvm flutter pub get
