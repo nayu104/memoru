@@ -8,7 +8,7 @@
   - 本番環境: make run-prod
   - .envが必要
  
-  ```
+```
 API_BASE_URL = ○○○○
 SUPABASE_URL_STG = ○○○○
 SUPABASE_KEY_STG = ○○○○
