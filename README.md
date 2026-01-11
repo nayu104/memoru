@@ -2,6 +2,8 @@
 ### メモに気分を反映するだけのアプリ
 
 - 技術スタック変更
+現状:
+- Flutter, Go, Firebase, Supabase, GCP
   - Supabaseを無料枠で運用するのが辛い。
   - 運用が重い。
   - 勉強目的もあったけれど、SupabaseとGoを削いでFirebase一本にした方が運用が簡潔で料金的にもいい気がする
