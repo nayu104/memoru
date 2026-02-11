@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SkeletonContainer extends StatelessWidget {
-  final double width;
-  final double height;
-  final double borderRadius;
-
   const SkeletonContainer({
     super.key,
     required this.width,
     required this.height,
     this.borderRadius = 24,
   });
+
+  final double width;
+  final double height;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {

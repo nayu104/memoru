@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memomemo/gen/assets.gen.dart';
-import '../../core/router/app_router.dart';
+
 import '../../core/provider/memo_state.dart';
 import '../../core/provider/search_state.dart';
+import '../../core/router/app_router.dart';
 import '../../core/widgets/skeleton_container.dart';
 import '../widgets/memo_card.dart';
 
@@ -60,7 +61,7 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
@@ -145,7 +146,7 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
                       itemCount: filteredItems.length,
                       itemBuilder: (context, index) =>
                           MemoCard(memo: filteredItems[index]),
-                      separatorBuilder: (_, __) => const SizedBox(height: 10),
+                      separatorBuilder: (_, _) => const SizedBox(height: 10),
                     );
                   },
                   error: (err, stack) =>
@@ -156,8 +157,8 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
                       vertical: 8,
                     ),
                     itemCount: 6,
-                    separatorBuilder: (_, __) => const SizedBox(height: 10),
-                    itemBuilder: (_, __) => const SkeletonContainer(
+                    separatorBuilder: (_, _) => const SizedBox(height: 10),
+                    itemBuilder: (_, _) => const SkeletonContainer(
                       width: double.infinity,
                       height: 80,
                       borderRadius: 12,
@@ -195,6 +196,6 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
   }
 
   void _openNewMemo(BuildContext context) {
-    const NewMemoRoute().push(context);
+    const NewMemoRoute().push<void>(context);
   }
 }

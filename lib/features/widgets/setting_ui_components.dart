@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SectionTitle extends StatelessWidget {
-  final String title;
-
   const SectionTitle({super.key, required this.title});
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +22,6 @@ class SectionTitle extends StatelessWidget {
 }
 
 class SettingTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String? subtitle;
-  final Color? titleColor;
-  final VoidCallback onTap;
-
   const SettingTile({
     super.key,
     required this.icon,
@@ -36,6 +30,12 @@ class SettingTile extends StatelessWidget {
     this.subtitle,
     this.titleColor,
   });
+
+  final IconData icon;
+  final String title;
+  final String? subtitle;
+  final Color? titleColor;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {

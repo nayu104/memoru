@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
+
+import '../data/memo_repository.dart';
 import '../domain/memo.dart';
 import '../domain/mood.dart';
-import '../data/memo_repository.dart';
 
 // プロバイダー定義
 // UI側からは ref.watch(memoNotifierProvider) でこのNotifierの状態（リスト）を監視します。
@@ -13,13 +14,30 @@ final memoNotifierProvider = AsyncNotifierProvider<MemoNotifier, List<Memo>>(
 );
 
 class MemoNotifier extends AsyncNotifier<List<Memo>> {
-  Future<void> backupToCloud() async {
+  /// クラウドにバックアップ（ログイン済みの場合のみ実行可能）
+  Future<CloudSaveResult> backupToCloud() async {
     final currentList = state.value ?? [];
 
-    if (currentList.isEmpty) return;
+    if (currentList.isEmpty) {
+      return CloudSaveResult.error('バックアップするメモがありません');
+    }
 
     final repository = ref.read(memoRepositoryProvider);
-    await repository.saveToCloud(currentList);
+    return repository.saveToCloud(currentList);
+  }
+
+  /// クラウドからメモを復元
+  Future<bool> restoreFromCloud() async {
+    final repository = ref.read(memoRepositoryProvider);
+    final cloudMemos = await repository.restoreFromCloud();
+
+    if (cloudMemos == null || cloudMemos.isEmpty) {
+      return false;
+    }
+
+    // ローカルに保存して状態を更新
+    await _saveAndRefresh(cloudMemos);
+    return true;
   }
 
   /// 初期データをロードします。
@@ -88,7 +106,9 @@ class MemoNotifier extends AsyncNotifier<List<Memo>> {
 
     // 削除対象が存在するか確認
     final targetIndex = currentList.indexWhere((m) => m.id == id);
-    if (targetIndex == -1) return null; // 見つからなければ何もしない
+    if (targetIndex == -1) {
+      return null; // 見つからなければ何もしない
+    }
 
     final target = currentList[targetIndex];
 

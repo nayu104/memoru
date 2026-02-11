@@ -8,8 +8,9 @@ import 'package:memomemo/features/screens/memo_list_screen.dart';
 import 'package:memomemo/features/widgets/memo_card.dart';
 
 class FakeMemoNotifier extends MemoNotifier {
-  final List<Memo> initialMemos;
   FakeMemoNotifier(this.initialMemos);
+
+  final List<Memo> initialMemos;
 
   @override
   Future<List<Memo>> build() async {
