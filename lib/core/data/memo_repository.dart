@@ -96,9 +96,7 @@ class MemoRepository {
           .collection('memos')
           .get();
 
-      return snapshot.docs
-          .map((doc) => Memo.fromJson(doc.data()))
-          .toList();
+      return snapshot.docs.map((doc) => Memo.fromJson(doc.data())).toList();
     } on Exception {
       return null;
     }

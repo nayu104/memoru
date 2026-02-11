@@ -10,8 +10,7 @@ Future<void> setupCrashlytics() async {
   };
   // フレームワークで捕捉されなかった非同期エラー
   PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance
-        .recordError(error, stack, fatal: true);
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
 }
