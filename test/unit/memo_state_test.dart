@@ -45,9 +45,12 @@ void main() {
 
     test('メモを更新できる', () async {
       await notifier.add(body: '古い');
-      final original = container.read(
-        memoNotifierProvider,
-      ).value!.first;
+      final original = container
+          .read(
+            memoNotifierProvider,
+          )
+          .value!
+          .first;
 
       final updated = original.copyWith(
         body: '新しい',
@@ -55,9 +58,12 @@ void main() {
       );
       await notifier.updateMemo(updated);
 
-      final result = container.read(
-        memoNotifierProvider,
-      ).value!.first;
+      final result = container
+          .read(
+            memoNotifierProvider,
+          )
+          .value!
+          .first;
       expect(result.body, '新しい');
       expect(result.mood, Mood.fired);
       expect(result.id, original.id);
@@ -65,9 +71,12 @@ void main() {
 
     test('メモを削除できる', () async {
       await notifier.add(body: '消す', mood: Mood.tired);
-      final memo = container.read(
-        memoNotifierProvider,
-      ).value!.first;
+      final memo = container
+          .read(
+            memoNotifierProvider,
+          )
+          .value!
+          .first;
 
       final deleted = await notifier.delete(memo.id);
       expect(deleted, isNotNull);
@@ -137,9 +146,11 @@ void main() {
       await notifier.add(body: '1番目');
       await notifier.add(body: '2番目', mood: Mood.happy);
 
-      final memos = container.read(
-        memoNotifierProvider,
-      ).value!;
+      final memos = container
+          .read(
+            memoNotifierProvider,
+          )
+          .value!;
       expect(memos[0].body, '2番目');
       expect(memos[1].body, '1番目');
     });
@@ -150,17 +161,21 @@ void main() {
         await notifier.add(body: 'A');
         await notifier.add(body: 'B', mood: Mood.happy);
 
-        final memos = container.read(
-          memoNotifierProvider,
-        ).value!;
+        final memos = container
+            .read(
+              memoNotifierProvider,
+            )
+            .value!;
         // B が先頭
         final bMemo = memos[0];
         final updated = bMemo.copyWith(body: 'B-updated');
         await notifier.updateMemo(updated);
 
-        final result = container.read(
-          memoNotifierProvider,
-        ).value!;
+        final result = container
+            .read(
+              memoNotifierProvider,
+            )
+            .value!;
         expect(result[0].body, 'B-updated');
         expect(result[1].body, 'A');
       },

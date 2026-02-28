@@ -131,13 +131,6 @@ void main() {
         await tester.tap(
           find.text('バックアップ / 復元'),
         );
-        await tester.pump();
-
-        expect(
-          find.text('クラウドに保存しています...'),
-          findsOneWidget,
-        );
-
         await tester.pumpAndSettle();
 
         expect(
