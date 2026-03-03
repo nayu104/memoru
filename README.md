@@ -9,8 +9,8 @@
 <img width="590" height="520" alt="onb_page03" src="https://github.com/user-attachments/assets/274d97f6-a7c2-4f67-ac92-5ae385ebd099" />
 
 
-- 技術スタック変更
-現状:
+### 技術スタック変更
+*現状:*
 - Flutter, Go, Firebase, Supabase, GCP
   - Supabaseを無料枠で運用するのが辛い。
   - 運用が重い。
