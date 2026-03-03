@@ -2,18 +2,11 @@
 ### メモに気分を反映するだけのアプリ
 
 
+
+
 ## メモアプリのメモルちゃん
 
 <img width="590" height="520" alt="onb_page03" src="https://github.com/user-attachments/assets/274d97f6-a7c2-4f67-ac92-5ae385ebd099" />
-
-## メモル星
-
-
-https://github.com/user-attachments/assets/ffed866f-61d5-4b7e-948d-d2fe3fa8483f
-
-
-https://github.com/user-attachments/assets/66f53b4a-8733-4a14-8815-48519aafcbc8
-
 
 
 - 技術スタック変更
@@ -21,14 +14,22 @@ https://github.com/user-attachments/assets/66f53b4a-8733-4a14-8815-48519aafcbc8
 - Flutter, Go, Firebase, Supabase, GCP
   - Supabaseを無料枠で運用するのが辛い。
   - 運用が重い。
-  - 勉強目的もあったけれど、SupabaseとGoを削いでFirebase一本にした方が運用が簡潔で料金的にもいい気がする
+  - 勉強目的もあったけれど、SupabaseとGoを削いでfirebase一本にした方が運用が簡潔で料金的にもいい気がする
 
+### 変更後：
+- フロント：Flutter
+- 分析：firebase
+
+### アプリMVP
+- メモができる
+- 感情を残せる
+### 拡張要素
+- バックアップ
+- メモル独自のゲーミフィケーション要素
 ---
 
 - 実行方法:
-  - ステージング環境: make run-stg
-  - 本番環境: make run-prod
-  - .envが必要
+開発環境：make run-dev
  
 ```
 API_BASE_URL = ○○○○
@@ -65,3 +66,14 @@ SUPABASE_KEY_PROD = ○○○○
 <img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 35 29" src="https://github.com/user-attachments/assets/aea9143b-496d-4f97-80df-8e65ea912627" />
 <img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 35 48" src="https://github.com/user-attachments/assets/28a62687-17a5-4511-a337-eeabc52d22df" />
 <img width="179" height="556" alt="Simulator Screenshot - iPhone 16 - 2025-12-01 at 12 35 55" src="https://github.com/user-attachments/assets/1f58b788-ac3b-4438-95f8-ce30bb9b923a" />
+
+
+
+## メモル星
+
+
+https://github.com/user-attachments/assets/ffed866f-61d5-4b7e-948d-d2fe3fa8483f
+
+
+https://github.com/user-attachments/assets/66f53b4a-8733-4a14-8815-48519aafcbc8
+
