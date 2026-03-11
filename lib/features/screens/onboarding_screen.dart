@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:memomemo/gen/assets.gen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../core/router/app_router.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  final bool fromSettings;
-
   const OnboardingScreen({super.key, this.fromSettings = false});
+
+  final bool fromSettings;
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -39,25 +40,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isFirstLaunch', false);
 
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
     const MemoListRoute().go(context);
   }
 
   final List<Map<String, String>> onboardingData = [
     {
-      "image": Assets.images.onbPage01.path,
-      "title": "今の気分を記録しよう",
-      "description": "嬉しい、悲しい、おだやか...\nその瞬間の感情をスタンプで残せます。",
+      'image': Assets.images.onbPage01.path,
+      'title': '今の気分を記録しよう',
+      'description': '嬉しい、悲しい、おだやか...\nその瞬間の感情をスタンプで残せます。',
     },
     {
-      "image": Assets.images.onbPage02.path,
-      "title": "シンプルなメモ",
-      "description": "思いついたことをサッと書き留める。\n余計な機能はない、あなただけの場所。",
+      'image': Assets.images.onbPage02.path,
+      'title': 'シンプルなメモ',
+      'description': '思いついたことをサッと書き留める。\n余計な機能はない、あなただけの場所。',
     },
     {
-      "image": Assets.images.onbPage03.path,
-      "title": "この子はあなたの相棒",
-      "description": "名前はメモルちゃん\n背景であなたを見守っています。",
+      'image': Assets.images.onbPage03.path,
+      'title': 'この子はあなたの相棒',
+      'description': '名前はメモルちゃん\n背景であなたを見守っています。',
     },
   ];
   @override
@@ -74,14 +77,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         itemBuilder: (context, index) {
           final data = onboardingData[index];
           return Padding(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.all(32),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(data["image"]!, height: 300),
+                Image.asset(data['image']!, height: 300),
                 const SizedBox(height: 40),
                 Text(
-                  data["title"]!,
+                  data['title']!,
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -90,12 +93,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  data["description"]!,
+                  data['description']!,
                   style: const TextStyle(fontSize: 16, color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.all(24),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
@@ -127,8 +130,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   },
                   child: Text(
                     _currentPage == onboardingData.length - 1
-                        ? (widget.fromSettings ? "閉じる" : "はじめる")
-                        : "つぎへ",
+                        ? (widget.fromSettings ? '閉じる' : 'はじめる')
+                        : 'つぎへ',
                   ),
                 ),
               ],

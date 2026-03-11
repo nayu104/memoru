@@ -1,11 +1,12 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:memomemo/core/constants/app_urls.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:memomemo/core/constants/app_urls.dart';
 import 'package:memomemo/core/provider/memo_state.dart';
 import 'package:memomemo/crashlytics.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../core/router/app_router.dart';
 import '../widgets/setting_ui_components.dart';
 
@@ -29,7 +30,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         title: const Text('設定'),
         leading: IconButton(
           tooltip: '設定画面を閉じるボタン',
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => context.pop(),
         ),
       ),
@@ -71,7 +72,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             icon: Icons.help_outline,
             title: '使い方を見る',
             onTap: () {
-              const OnboardingRoute(fromSettings: true).push(context);
+              const OnboardingRoute(fromSettings: true).push<void>(context);
             },
           ),
           SettingTile(icon: Icons.description, title: '利用規約', onTap: () {}),
@@ -92,8 +93,8 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             title: 'クラッシュテスト',
             titleColor: Theme.of(context).colorScheme.error,
             onTap: () {
-              Crashlytics.log('ログ');
-              Crashlytics.crash('アプリクラッシュテスト');
+              logCrashlytics('ログ');
+              crashApp('アプリクラッシュテスト');
             },
           ),
           const SizedBox(height: 32),
@@ -115,13 +116,13 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
           context,
         ).showSnackBar(const SnackBar(content: Text('保存しました！')));
       }
-    } catch (e) {
-      // 4. 失敗フィードバック
+    } on Exception {
+      // 失敗フィードバック
       if (context.mounted) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('保存に失敗しました'),
+            content: const Text('保存に失敗しました'),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

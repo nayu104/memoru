@@ -8,7 +8,6 @@ import 'package:memomemo/features/screens/new_memo_modal.dart';
 
 class SpyMemoNotifier extends MemoNotifier {
   bool addCalled = false;
-  bool updateCalled = false;
   String? lastBody;
   Mood? lastMood;
 
@@ -63,12 +62,13 @@ void main() {
     await tester.tap(find.byType(TextField));
     await tester.pump();
 
-    // キーボードが表示されているはず（tester.testTextInput.isVisible で確認できるが、
-    // ここではフォーカスが当たっているかを確認）
-    // Note: WidgetTester doesn't easily show keyboard visibility without more setup.
+    // キーボードが表示されているはず
+    // Note: WidgetTester doesn't easily show keyboard
+    // visibility without more setup.
     // Instead, we check if the focus node has focus.
-    // But TextField creates its own FocusNode if not provided.
-    // Let's just check if tapping "完了" doesn't crash and maybe check if we are still on the same page.
+    // But TextField creates its own FocusNode if not
+    // provided. Let's just check if tapping "完了"
+    // doesn't crash.
 
     await tester.tap(find.text('完了'));
     await tester.pump();

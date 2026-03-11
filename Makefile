@@ -1,16 +1,26 @@
-# 検証環境 (Staging) で実行
-# main_stg.dart を起動ファイルとして指定
-run-stg:
-	fvm flutter run -t lib/main_stg.dart
-
-# 本番環境 (Production) で実行
-# main_prod.dart を起動ファイルとして指定
-run-prod:
-	fvm flutter run -t lib/main_prod.dart
+# 開発環境で実行
+run-dev:
+	fvm flutter run
 
 # ビルド用コマンド（リリース用）
-build-ios-prod:
-	fvm flutter build ipa -t lib/main_prod.dart --release
+build-ios:
+	fvm flutter build ipa --release
 
-build-android-prod:
-	fvm flutter build appbundle -t lib/main_prod.dart --release
+build-android:
+	fvm flutter build appbundle --release
+
+# テスト
+test:
+	fvm flutter test
+
+# テスト（カバレッジ付き）
+test-coverage:
+	fvm flutter test --coverage
+
+# 静的解析
+analyze:
+	fvm flutter analyze
+
+# コード生成
+gen:
+	fvm flutter pub run build_runner build --delete-conflicting-outputs

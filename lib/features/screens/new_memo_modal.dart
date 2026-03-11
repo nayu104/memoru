@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memomemo/core/domain/mood.dart';
 import 'package:memomemo/core/domain/memo.dart';
+import 'package:memomemo/core/domain/mood.dart';
+
 import '../../core/provider/memo_state.dart';
 
 class NewMemoModal extends ConsumerStatefulWidget {
-  final Memo? initial;
   const NewMemoModal({super.key, this.initial});
+
+  final Memo? initial;
 
   @override
   ConsumerState<NewMemoModal> createState() => _NewMemoModalState();
@@ -30,7 +32,9 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
   Future<void> _saveAndClose() async {
     final text = _controller.text.trim();
     if (text.isEmpty) {
-      if (mounted) Navigator.of(context).pop();
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
       return;
     }
 
@@ -41,7 +45,9 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
     } else {
       // 変更がない場合は更新しない
       if (widget.initial!.body == text && widget.initial!.mood == _selected) {
-        if (mounted) Navigator.of(context).pop();
+        if (mounted) {
+          Navigator.of(context).pop();
+        }
         return;
       }
 
@@ -63,7 +69,9 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
-        if (didPop) return;
+        if (didPop) {
+          return;
+        }
         await _saveAndClose();
       },
       child: Scaffold(
@@ -88,7 +96,7 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

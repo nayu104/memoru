@@ -45,9 +45,9 @@ class SettingsRoute extends GoRouteData with _$SettingsRoute {
 }
 
 class NewMemoRoute extends GoRouteData with _$NewMemoRoute {
-  final Memo? $extra;
-
   const NewMemoRoute({this.$extra});
+
+  final Memo? $extra;
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
@@ -67,9 +67,9 @@ class MemoruStarRoute extends GoRouteData with _$MemoruStarRoute {
 
 @TypedGoRoute<OnboardingRoute>(path: '/onboarding')
 class OnboardingRoute extends GoRouteData with _$OnboardingRoute {
-  final bool fromSettings;
-
   const OnboardingRoute({this.fromSettings = false});
+
+  final bool fromSettings;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>

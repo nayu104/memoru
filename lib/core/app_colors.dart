@@ -21,5 +21,5 @@ class AppColors {
   static const textSub = Color(0xFF8D6E63);
 
   static const delete = Color(0xFFFF8F00);
-  static const onDelete = Colors.white; // その上のアイコン色
+  static const Color onDelete = Colors.white; // その上のアイコン色
 }
