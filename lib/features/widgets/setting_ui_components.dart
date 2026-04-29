@@ -29,6 +29,7 @@ class SettingTile extends StatelessWidget {
     required this.onTap,
     this.subtitle,
     this.titleColor,
+    this.showTrailingArrow = true,
   });
 
   final IconData icon;
@@ -36,6 +37,7 @@ class SettingTile extends StatelessWidget {
   final String? subtitle;
   final Color? titleColor;
   final VoidCallback onTap;
+  final bool showTrailingArrow;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,9 @@ class SettingTile extends StatelessWidget {
               ),
             )
           : null,
-      trailing: Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant),
+      trailing: showTrailingArrow
+          ? Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant)
+          : null,
       onTap: onTap,
     );
   }

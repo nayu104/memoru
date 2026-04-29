@@ -19,8 +19,3 @@ Future<void> setupCrashlytics() async {
 void logCrashlytics(String message) {
   FirebaseCrashlytics.instance.log(message);
 }
-
-/// アプリを強制的にクラッシュさせる
-void crashApp(String message) {
-  FirebaseCrashlytics.instance.crash();
-}
