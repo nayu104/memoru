@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
+
+import '../data/local_memo_repository.dart';
 import '../domain/memo.dart';
 import '../domain/mood.dart';
-import '../data/memo_repository.dart';
 
 // プロバイダー定義
 // UI側からは ref.watch(memoNotifierProvider) でこのNotifierの状態（リスト）を監視します。
@@ -100,7 +101,9 @@ class MemoNotifier extends AsyncNotifier<List<Memo>> {
 
     // 削除対象が存在するか確認
     final targetIndex = currentList.indexWhere((m) => m.id == id);
-    if (targetIndex == -1) return null; // 見つからなければ何もしない
+    if (targetIndex == -1) {
+      return null; // 見つからなければ何もしない
+    }
 
     final target = currentList[targetIndex];
 
