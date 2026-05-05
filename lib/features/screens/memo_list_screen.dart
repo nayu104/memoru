@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:memomemo/gen/assets.gen.dart';
 import '../../core/provider/memo_state.dart';
 import '../../core/provider/search_state.dart';
 import '../widgets/memo_card.dart';
-import 'new_memo_modal.dart';
-import 'setting_screen.dart';
 
 class MemoListScreen extends ConsumerStatefulWidget {
   const MemoListScreen({super.key});
@@ -41,9 +40,7 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
           IconButton(
             tooltip: '設定画面を開くボタン',
             onPressed: () {
-              Navigator.of(
-                context,
-              ).push(MaterialPageRoute(builder: (_) => const SettingScreen()));
+              context.push('/settings');
             },
             icon: const Icon(Icons.settings), // 色指定を削除（テーマに従う）
           ),
@@ -160,11 +157,6 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
   }
 
   void _openNewMemo(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        fullscreenDialog: true,
-        builder: (_) => const NewMemoModal(),
-      ),
-    );
+    context.push('/new');
   }
 }

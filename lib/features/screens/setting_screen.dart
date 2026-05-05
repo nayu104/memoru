@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:memomemo/core/constants/app_urls.dart';
 //import 'package:memomemo/core/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memomemo/core/provider/memo_state.dart';
 import 'package:memomemo/crashlytics.dart';
-import 'onboarding_screen.dart';
 
 class SettingScreen extends ConsumerWidget {
   const SettingScreen({super.key});
@@ -21,7 +21,7 @@ class SettingScreen extends ConsumerWidget {
         leading: IconButton(
           tooltip: '設定画面を閉じるボタン',
           icon: Icon(Icons.arrow_back_ios),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
       ),
       body: ListView(
@@ -141,11 +141,7 @@ class SettingScreen extends ConsumerWidget {
             icon: Icons.help_outline,
             title: '使い方を見る',
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const OnboardingScreen(fromSettings: true),
-                ),
-              );
+              context.push('/onboarding?fromSettings=true');
             },
           ),
           _buildSettingTile(
