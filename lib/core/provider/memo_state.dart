@@ -14,32 +14,6 @@ final memoNotifierProvider = AsyncNotifierProvider<MemoNotifier, List<Memo>>(
 );
 
 class MemoNotifier extends AsyncNotifier<List<Memo>> {
-  /// クラウドにバックアップ（ログイン済みの場合のみ実行可能）
-  Future<CloudSaveResult> backupToCloud() async {
-    final currentList = state.value ?? [];
-
-    if (currentList.isEmpty) {
-      return CloudSaveResult.error('バックアップするメモがありません');
-    }
-
-    final repository = ref.read(memoRepositoryProvider);
-    return repository.saveToCloud(currentList);
-  }
-
-  /// クラウドからメモを復元
-  Future<bool> restoreFromCloud() async {
-    final repository = ref.read(memoRepositoryProvider);
-    final cloudMemos = await repository.restoreFromCloud();
-
-    if (cloudMemos == null || cloudMemos.isEmpty) {
-      return false;
-    }
-
-    // ローカルに保存して状態を更新
-    await _saveAndRefresh(cloudMemos);
-    return true;
-  }
-
   /// 初期データをロードします。
   @override
   Future<List<Memo>> build() async {

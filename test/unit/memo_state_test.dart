@@ -115,20 +115,6 @@ void main() {
     });
   });
 
-  group('backupToCloud', () {
-    test(
-      'メモが空の場合はエラーを返す',
-      () async {
-        final result = await notifier.backupToCloud();
-        expect(result.success, false);
-        expect(
-          result.errorMessage,
-          'バックアップするメモがありません',
-        );
-      },
-    );
-  });
-
   group('デフォルトの mood', () {
     test(
       'mood を省略すると Mood.calm になる',

@@ -7,29 +7,6 @@ import 'package:memomemo/core/domain/mood.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  group('CloudSaveResult', () {
-    test('success() は success=true を返す', () {
-      final result = CloudSaveResult.success();
-      expect(result.success, true);
-      expect(result.errorMessage, isNull);
-      expect(result.requiresAuth, false);
-    });
-
-    test('authRequired() は requiresAuth=true を返す', () {
-      final result = CloudSaveResult.authRequired();
-      expect(result.success, false);
-      expect(result.requiresAuth, true);
-      expect(result.errorMessage, 'ログインが必要です');
-    });
-
-    test('error() はエラーメッセージを持つ', () {
-      final result = CloudSaveResult.error('テストエラー');
-      expect(result.success, false);
-      expect(result.errorMessage, 'テストエラー');
-      expect(result.requiresAuth, false);
-    });
-  });
-
   group('MemoRepository (ローカル保存)', () {
     late MemoRepository repository;
 
