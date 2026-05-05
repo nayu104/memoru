@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memomemo/core/domain/memo.dart';
 import 'package:memomemo/core/domain/mood.dart';
-import '../../core/provider/memo_state.dart';
-import '../screens/new_memo_modal.dart';
+
 import '../../core/app_colors.dart';
+import '../../core/provider/memo_state.dart';
+import '../../core/router/app_router.dart';
 
 class MemoCard extends ConsumerWidget {
-  final Memo memo;
   const MemoCard({super.key, required this.memo});
+
+  final Memo memo;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,12 +32,15 @@ class MemoCard extends ConsumerWidget {
       onDismissed: (_) {
         final notifier = ref.read(memoNotifierProvider.notifier);
         notifier.delete(memo.id).then((removedMemo) {
-          if (removedMemo == null || !context.mounted) return;
+          if (removedMemo == null || !context.mounted) {
+            return;
+          }
 
           ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: const Text('メモを削除しました'),
+              duration: const Duration(seconds: 3),
               action: SnackBarAction(
                 label: '元に戻す',
                 onPressed: () {
@@ -50,12 +55,7 @@ class MemoCard extends ConsumerWidget {
         // ここでテーマ(app_theme.dart)の設定が勝手に適用される
         clipBehavior: Clip.antiAlias, // タップ時の波紋を角丸からはみ出させない設定
         child: InkWell(
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (_) => NewMemoModal(initial: memo),
-            ),
-          ),
+          onTap: () => NewMemoRoute($extra: memo).push<void>(context),
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Row(
