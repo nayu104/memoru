@@ -35,13 +35,15 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const _MemoListAppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _SearchBar(controller: _searchController),
-          const SizedBox(height: 12),
-          const Expanded(child: _MemoContentArea()),
-        ],
+      body: SelectionArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _SearchBar(controller: _searchController),
+            const SizedBox(height: 12),
+            const Expanded(child: _MemoContentArea()),
+          ],
+        ),
       ),
       floatingActionButton: _AnimatedFab(
         onPressed: () => const NewMemoRoute().push<void>(context),

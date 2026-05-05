@@ -66,19 +66,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView.builder(
-        controller: _pageController,
-        itemCount: onboardingData.length,
-        onPageChanged: (index) {
-          setState(() {
-            _currentPage = index;
-          });
-        },
-        itemBuilder: (context, index) {
-          final data = onboardingData[index];
-          return Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
+      body: SelectionArea(
+        child: PageView.builder(
+          controller: _pageController,
+          itemCount: onboardingData.length,
+          onPageChanged: (index) {
+            setState(() {
+              _currentPage = index;
+            });
+          },
+          itemBuilder: (context, index) {
+            final data = onboardingData[index];
+            return Padding(
+              padding: const EdgeInsets.all(32),
+              child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(data['image']!, height: 300),
@@ -136,8 +137,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ],
             ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

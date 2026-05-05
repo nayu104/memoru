@@ -32,8 +32,10 @@ class _SettingScreenState extends State<SettingScreen> {
           onPressed: () => context.pop(),
         ),
       ),
-      body: ListView(
-        children: [
+      body: SelectionArea(
+        child: ListView(
+          children: [
+
           // ── サポート ──────────────────────────────
           const SectionTitle(title: 'サポート'),
           SettingTile(
@@ -79,7 +81,8 @@ class _SettingScreenState extends State<SettingScreen> {
             onTap: () {},
           ),
           const SizedBox(height: 32),
-        ],
+          ],
+        ),
       ),
     );
   }

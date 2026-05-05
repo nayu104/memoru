@@ -95,9 +95,10 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
             ),
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Column(
+        body: SelectionArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 6),
@@ -144,6 +145,7 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
           ),
         ),
       ),
+    ),
     );
   }
 }
