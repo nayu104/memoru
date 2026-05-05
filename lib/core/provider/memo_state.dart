@@ -6,19 +6,31 @@ import '../data/memo_repository.dart';
 
 // プロバイダー定義
 // UI側からは ref.watch(memoNotifierProvider) でこのNotifierの状態（リスト）を監視します。
-final memoNotifierProvider = AsyncNotifierProvider<MemoNotifier, List<Memo>>(
-  () {
-    return MemoNotifier();
-  },
-);
+final memoNotifierProvider = AsyncNotifierProvider<MemoNotifier, List<Memo>>(MemoNotifier.new);
 
 class MemoNotifier extends AsyncNotifier<List<Memo>> {
+  MemoNotifier({MemoRepository Function()? repositoryBuilder, String Function()? idGenerator})
+      : _repositoryBuilder = repositoryBuilder,
+        _generateId = idGenerator ?? _defaultUuid.v4;
+
+  static const _defaultUuid = Uuid();
+  final MemoRepository Function()? _repositoryBuilder;
+  final String Function() _generateId;
+
+  MemoRepository _resolveRepository() {
+    final builder = _repositoryBuilder;
+    if (builder != null) {
+      return builder();
+    }
+    return ref.read(memoRepositoryProvider);
+  }
+
   Future<void> backupToCloud() async {
     final currentList = state.value ?? [];
 
     if (currentList.isEmpty) return;
 
-    final repository = ref.read(memoRepositoryProvider);
+    final repository = _resolveRepository();
     await repository.saveToCloud(currentList);
   }
 
@@ -30,14 +42,14 @@ class MemoNotifier extends AsyncNotifier<List<Memo>> {
 
   /// リポジトリからデータを全件取得
   List<Memo> _fetchAll() {
-    final repository = ref.read(memoRepositoryProvider);
+    final repository = _resolveRepository();
     return repository.fetchAll();
   }
 
   /// 内部ヘルパー: データを保存し、同時に画面の状態（state）も更新する
   /// これを呼ぶだけで、UIは自動的に再描画されます。
   Future<void> _saveAndRefresh(List<Memo> newMemos) async {
-    final repository = ref.read(memoRepositoryProvider);
+    final repository = _resolveRepository();
 
     // 1. 永続化（スマホ本体への保存）
     await repository.saveAll(newMemos);
@@ -56,7 +68,7 @@ class MemoNotifier extends AsyncNotifier<List<Memo>> {
 
     // ドメイン層のファクトリを使って、完全なMemoオブジェクトを生成
     final newMemo = Memo.create(
-      id: const Uuid().v4(), // ここでユニークIDを発行
+      id: _generateId(), // ここでユニークIDを発行
       body: body,
       mood: mood,
     );
@@ -100,8 +112,21 @@ class MemoNotifier extends AsyncNotifier<List<Memo>> {
     return target; // 削除したデータを呼び出し元に返す
   }
 
+  /// 削除したメモを復元する
+  Future<void> restore(Memo memo) async {
+    final currentList = state.value ?? [];
+    // 同じメモが既にリスト内に存在する場合は除外してから先頭に追加する。
+    // SnackBarのアクションを連打しても重複しないようにするため。
+    final newList = [
+      memo,
+      ...currentList.where((existing) => existing.id != memo.id),
+    ];
+
+    await _saveAndRefresh(newList);
+  }
+
   Future<void> deleteAll() async {
-    final repository = ref.read(memoRepositoryProvider);
+    final repository = _resolveRepository();
     // 1. リポジトリに削除命令（スマホのデータを消す）
     await repository.deleteAll();
     // 2. メモリ上の状態も空にする（画面を空っぽにする）

@@ -49,9 +49,10 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      body: SelectionArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextField(
@@ -149,7 +150,8 @@ class _MemoListScreenState extends ConsumerState<MemoListScreen> {
               ],
             ),
           ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: '新しいメモを作成するボタン',

@@ -24,8 +24,9 @@ class SettingScreen extends ConsumerWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: ListView(
-        children: [
+      body: SelectionArea(
+        child: ListView(
+          children: [
           // ── データ設定 ─────────────────────────────
           _buildSectionTitle(context, 'データ'),
           _buildSettingTile(
@@ -179,7 +180,8 @@ class SettingScreen extends ConsumerWidget {
             },
           ),
           const SizedBox(height: 32),
-        ],
+          ],
+        ),
       ),
     );
   }

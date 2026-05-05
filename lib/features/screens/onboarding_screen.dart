@@ -64,17 +64,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView.builder(
-        controller: _pageController,
-        itemCount: onboardingData.length,
-        onPageChanged: (index) {
-          setState(() {
-            _currentPage = index;
-          });
-        },
-        itemBuilder: (context, index) {
-          final data = onboardingData[index];
-          return Padding(
+      body: SelectionArea(
+        child: PageView.builder(
+          controller: _pageController,
+          itemCount: onboardingData.length,
+          onPageChanged: (index) {
+            setState(() {
+              _currentPage = index;
+            });
+          },
+          itemBuilder: (context, index) {
+            final data = onboardingData[index];
+            return Padding(
             padding: const EdgeInsets.all(32.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -134,8 +135,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ],
             ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
