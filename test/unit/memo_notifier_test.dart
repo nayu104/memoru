@@ -1,20 +1,59 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-//import 'package:memomemo/core/domain/memo.dart';
+import 'package:memomemo/core/domain/memo.dart';
 import 'package:memomemo/core/domain/mood.dart';
 import 'package:memomemo/core/provider/memo_state.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:memomemo/core/data/memo_repository.dart';
+
+class _FakeMemoRepository implements MemoRepository {
+  List<Memo> _storage = [];
+
+  @override
+  Future<void> saveToCloud(List<Memo> memos) async {}
+
+  @override
+  Future<void> saveAll(List<Memo> memos) async {
+    _storage = [...memos];
+  }
+
+  @override
+  List<Memo> fetchAll() => [..._storage];
+
+  @override
+  Future<void> deleteAll() async {
+    _storage = [];
+  }
+}
+
+class _IdGenerator {
+  int _counter = 0;
+  String call() => 'test-id-${_counter++}';
+}
+
+ProviderContainer _createContainer() {
+  final repository = _FakeMemoRepository();
+  final idGenerator = _IdGenerator();
+
+  final container = ProviderContainer(
+    overrides: [
+      memoRepositoryProvider.overrideWithValue(repository),
+      memoNotifierProvider.overrideWith(
+        () => MemoNotifier(
+          repositoryBuilder: () => repository,
+          idGenerator: idGenerator.call,
+        ),
+      ),
+    ],
+  );
+
+  addTearDown(container.dispose);
+  return container;
+}
 
 void main() {
-  // SharedPreferencesのモック（偽物）を準備
-  // これがないと "MissingPluginException" エラー
-  setUp(() {
-    SharedPreferences.setMockInitialValues({});
-  });
 
   test('初期状態は空であること', () {
-    final container = ProviderContainer();
-    addTearDown(container.dispose);
+    final container = _createContainer();
 
     // プロバイダーの状態を読み込む
     final state = container.read(memoNotifierProvider);
@@ -24,8 +63,7 @@ void main() {
   });
 
   test('メモを追加できること', () async {
-    final container = ProviderContainer();
-    addTearDown(container.dispose);
+    final container = _createContainer();
 
     final notifier = container.read(memoNotifierProvider.notifier);
 
@@ -45,8 +83,7 @@ void main() {
   });
 
   test('メモを削除できること', () async {
-    final container = ProviderContainer();
-    addTearDown(container.dispose);
+    final container = _createContainer();
     final notifier = container.read(memoNotifierProvider.notifier);
 
     // 1つ追加
@@ -59,5 +96,42 @@ void main() {
     // 空になっているか確認
     final state = container.read(memoNotifierProvider);
     expect(state.value, isEmpty);
+  });
+
+  test('削除したメモを復元でき、メタデータも保持されること', () async {
+    final container = _createContainer();
+    final notifier = container.read(memoNotifierProvider.notifier);
+
+    await notifier.add(body: '復元メモ', mood: Mood.happy);
+    final original = container.read(memoNotifierProvider).value!.first;
+
+    final removed = await notifier.delete(original.id);
+    expect(removed, isNotNull);
+
+    await notifier.restore(removed!);
+
+    final restored = container.read(memoNotifierProvider).value!;
+    expect(restored, hasLength(1));
+    expect(restored.first.id, original.id);
+    expect(restored.first.createdAt, original.createdAt);
+    expect(restored.first.updatedAt, original.updatedAt);
+  });
+
+  test('同じメモを重複復元しないこと', () async {
+    final container = _createContainer();
+    final notifier = container.read(memoNotifierProvider.notifier);
+
+    await notifier.add(body: '重複しない', mood: Mood.calm);
+    final memo = container.read(memoNotifierProvider).value!.first;
+
+    final removed = await notifier.delete(memo.id);
+    expect(removed, isNotNull);
+
+    await notifier.restore(removed!);
+    await notifier.restore(removed);
+
+    final restored = container.read(memoNotifierProvider).value!;
+    expect(restored, hasLength(1));
+    expect(restored.first.id, memo.id);
   });
 }
