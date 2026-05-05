@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/app.dart';
+import 'core/application/app_info_provider.dart';
 import 'core/data/local_memo_repository.dart';
-import 'core/provider/app_info_provider.dart';
-import 'crashlytics.dart';
+import 'core/utils/crashlytics.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {

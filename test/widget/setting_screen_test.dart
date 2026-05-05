@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:memomemo/core/application/memo_state.dart';
 import 'package:memomemo/core/domain/memo.dart';
-import 'package:memomemo/core/provider/memo_state.dart';
 import 'package:memomemo/features/screens/setting_screen.dart';
 
 import '../mock_firebase.dart';

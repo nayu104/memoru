@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memomemo/gen/assets.gen.dart';
 
+import '../../core/application/memo_state.dart';
+import '../../core/application/search_state.dart';
 import '../../core/domain/memo.dart';
-import '../../core/provider/memo_state.dart';
-import '../../core/provider/search_state.dart';
 import '../../core/router/app_router.dart';
 import '../../core/widgets/skeleton_container.dart';
 import '../widgets/memo_card.dart';

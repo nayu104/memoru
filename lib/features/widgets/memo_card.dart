@@ -4,7 +4,7 @@ import 'package:memomemo/core/domain/memo.dart';
 import 'package:memomemo/core/domain/mood.dart';
 
 import '../../core/app_colors.dart';
-import '../../core/provider/memo_state.dart';
+import '../../core/application/memo_state.dart';
 import '../../core/router/app_router.dart';
 
 class MemoCard extends ConsumerWidget {

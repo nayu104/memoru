@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:memomemo/core/application/memo_state.dart';
 import 'package:memomemo/core/data/local_memo_repository.dart';
 import 'package:memomemo/core/domain/mood.dart';
-import 'package:memomemo/core/provider/memo_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:memomemo/core/app.dart';
-import 'package:memomemo/core/provider/app_info_provider.dart';
+import 'package:memomemo/core/application/app_info_provider.dart';
 
 void main() {
   testWidgets('😄初回起動時はオンボーディングが表示されること', (WidgetTester tester) async {

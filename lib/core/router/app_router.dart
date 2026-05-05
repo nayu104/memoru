@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/legal/privacy_policy_page.dart';
-import '../../features/legal/terms_of_service_page.dart';
 import '../../features/screens/memo_list_screen.dart';
 import '../../features/screens/memoru_star_screen.dart';
 import '../../features/screens/new_memo_modal.dart';
 import '../../features/screens/onboarding_screen.dart';
+import '../../features/screens/privacy_policy_page.dart';
 import '../../features/screens/setting_screen.dart';
+import '../../features/screens/terms_of_service_page.dart';
+import '../application/app_info_provider.dart';
 import '../domain/memo.dart';
-import '../provider/app_info_provider.dart';
 
 part 'app_router.g.dart';
 
