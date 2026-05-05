@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
-import '../data/memo_repository.dart';
+import '../data/local_memo_repository.dart';
 import '../domain/memo.dart';
 import '../domain/mood.dart';
 

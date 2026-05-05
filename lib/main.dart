@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/app.dart';
-import 'core/data/memo_repository.dart';
+import 'core/data/local_memo_repository.dart';
 import 'core/provider/app_info_provider.dart';
 import 'crashlytics.dart';
 import 'firebase_options.dart';
@@ -23,7 +23,7 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       overrides: [
-        memoRepositoryProvider.overrideWithValue(MemoRepository(prefs)),
+        memoRepositoryProvider.overrideWithValue(LocalMemoRepository(prefs)),
         isFirstLaunchProvider.overrideWithValue(isFirstLaunch),
       ],
       child: const MemoMemoApp(),

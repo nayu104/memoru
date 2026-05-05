@@ -1,19 +1,19 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:memomemo/core/data/memo_repository.dart';
+import 'package:memomemo/core/data/local_memo_repository.dart';
 import 'package:memomemo/core/domain/memo.dart';
 import 'package:memomemo/core/domain/mood.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   group('MemoRepository (ローカル保存)', () {
-    late MemoRepository repository;
+    late LocalMemoRepository repository;
 
     setUp(() async {
       SharedPreferences.setMockInitialValues({});
       final prefs = await SharedPreferences.getInstance();
-      repository = MemoRepository(prefs);
+      repository = LocalMemoRepository(prefs);
     });
 
     test('初期状態では空リストを返す', () {
@@ -112,7 +112,7 @@ void main() {
           {'memos_v1': 'invalid-json'},
         );
         final prefs = await SharedPreferences.getInstance();
-        final repo = MemoRepository(prefs);
+        final repo = LocalMemoRepository(prefs);
 
         expect(repo.fetchAll, throwsA(isA<FormatException>()));
       },
@@ -161,7 +161,7 @@ void main() {
       () async {
         SharedPreferences.setMockInitialValues({});
         final prefs = await SharedPreferences.getInstance();
-        final repo = MemoRepository(prefs);
+        final repo = LocalMemoRepository(prefs);
 
         final now = DateTime(2025, 3, 15, 12);
         final memos = [
