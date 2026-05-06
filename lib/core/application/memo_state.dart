@@ -29,9 +29,12 @@ class MemoNotifier extends AsyncNotifier<List<Memo>> {
   }
 
   /// 内部ヘルパー: データを保存し、同時に画面の状態（state）も更新する
+  /// 保存失敗時は AsyncError に遷移し、UI が「何が起きたか」判断できるようにする
   Future<void> _saveAndRefresh(List<Memo> newMemos) async {
-    await _repository.saveAll(newMemos);
-    state = AsyncData(newMemos);
+    state = await AsyncValue.guard(() async {
+      await _repository.saveAll(newMemos);
+      return newMemos;
+    });
   }
 
   /// 新規作成

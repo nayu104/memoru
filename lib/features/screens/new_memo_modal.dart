@@ -129,16 +129,18 @@ class _NewMemoModalState extends ConsumerState<NewMemoModal> {
 
               // Body Input
               Expanded(
-                child: TextField(
-                  controller: _controller,
-                  expands: true,
-                  maxLines: null,
-                  textAlignVertical: TextAlignVertical.top, // 上寄せ
-                  decoration: const InputDecoration(
-                    hintText: '今、何を考えてる？',
-                    border: InputBorder.none,
+                child: SelectionContainer.disabled(
+                  child: TextField(
+                    controller: _controller,
+                    expands: true,
+                    maxLines: null,
+                    textAlignVertical: TextAlignVertical.top,
+                    decoration: const InputDecoration(
+                      hintText: '今、何を考えてる？',
+                      border: InputBorder.none,
+                    ),
+                    style: const TextStyle(fontSize: 16),
                   ),
-                  style: const TextStyle(fontSize: 16),
                 ),
               ),
             ],

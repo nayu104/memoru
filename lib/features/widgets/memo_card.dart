@@ -29,9 +29,14 @@ class MemoCard extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: const Icon(Icons.delete, color: AppColors.onDelete),
       ),
-      onDismissed: (_) {
+      confirmDismiss: (_) async {
+        // UI上は先に消す（trueを返す）が、実際の削除は onDismissed で行う
+        return true;
+      },
+      onDismissed: (_) async {
         final notifier = ref.read(memoNotifierProvider.notifier);
-        notifier.delete(memo.id).then((removedMemo) {
+        try {
+          final removedMemo = await notifier.delete(memo.id);
           if (removedMemo == null || !context.mounted) {
             return;
           }
@@ -43,13 +48,20 @@ class MemoCard extends ConsumerWidget {
               duration: const Duration(seconds: 3),
               action: SnackBarAction(
                 label: '元に戻す',
-                onPressed: () {
-                  notifier.restore(removedMemo);
-                },
+                onPressed: () => notifier.restore(removedMemo),
               ),
             ),
           );
-        });
+        } on Exception {
+          // 保存失敗時: 削除前の状態に戻す（MemoNotifierがAsyncErrorになるため再ロード）
+          if (!context.mounted) {
+            return;
+          }
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('削除に失敗しました。もう一度お試しください。')),
+          );
+          await notifier.build(); // stateをリロード
+        }
       },
       child: Card(
         // ここでテーマ(app_theme.dart)の設定が勝手に適用される

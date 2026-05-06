@@ -166,5 +166,46 @@ void main() {
         expect(result[1].body, 'A');
       },
     );
+
+    test('存在しないIDでupdateMemoしてもリストが変わらないこと', () async {
+      await notifier.add(body: '変更前');
+      final before = container.read(memoNotifierProvider).value!;
+
+      final ghost = before.first.copyWith(id: 'non-existent-id', body: '変更後');
+      await notifier.updateMemo(ghost);
+
+      final after = container.read(memoNotifierProvider).value!;
+      expect(after.length, 1);
+      expect(after.first.body, '変更前');
+    });
+  });
+
+  group('deleteAll', () {
+    test('全メモを削除できる', () async {
+      await notifier.add(body: 'A');
+      await notifier.add(body: 'B');
+
+      await notifier.deleteAll();
+
+      final state = container.read(memoNotifierProvider);
+      expect(state.hasValue, true);
+      expect(state.value, isEmpty);
+    });
+
+    test('空の状態で deleteAll しても問題ない', () async {
+      await notifier.deleteAll();
+
+      final state = container.read(memoNotifierProvider);
+      expect(state.hasValue, true);
+      expect(state.value, isEmpty);
+    });
+  });
+
+  group('デフォルトの mood', () {
+    test('mood を省略すると Mood.calm になる', () async {
+      await notifier.add(body: 'テスト');
+      final memo = container.read(memoNotifierProvider).value!.first;
+      expect(memo.mood, Mood.calm);
+    });
   });
 }

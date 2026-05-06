@@ -84,7 +84,8 @@ class _SearchBar extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: TextField(
+      child: SelectionContainer.disabled(
+        child: TextField(
         controller: controller,
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search, color: Colors.black38),
@@ -110,6 +111,7 @@ class _SearchBar extends ConsumerWidget {
         onChanged: (value) {
           ref.read(searchQueryProvider.notifier).state = value;
         },
+        ),
       ),
     );
   }
