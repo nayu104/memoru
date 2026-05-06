@@ -86,31 +86,31 @@ class _SearchBar extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SelectionContainer.disabled(
         child: TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.search, color: Colors.black38),
-          hintText: 'けんさく',
-          hintStyle: const TextStyle(color: Colors.black38),
-          suffixIcon: searchQuery.isNotEmpty
-              ? IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    // プロバイダーとコントローラーの両方をクリア
-                    ref.read(searchQueryProvider.notifier).state = '';
-                    controller.clear();
-                  },
-                )
-              : null,
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide.none,
+          controller: controller,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(Icons.search, color: Colors.black38),
+            hintText: 'けんさく',
+            hintStyle: const TextStyle(color: Colors.black38),
+            suffixIcon: searchQuery.isNotEmpty
+                ? IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () {
+                      // プロバイダーとコントローラーの両方をクリア
+                      ref.read(searchQueryProvider.notifier).state = '';
+                      controller.clear();
+                    },
+                  )
+                : null,
+            filled: true,
+            fillColor: Colors.white,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide.none,
+            ),
           ),
-        ),
-        onChanged: (value) {
-          ref.read(searchQueryProvider.notifier).state = value;
-        },
+          onChanged: (value) {
+            ref.read(searchQueryProvider.notifier).state = value;
+          },
         ),
       ),
     );
