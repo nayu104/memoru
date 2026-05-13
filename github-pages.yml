@@ -29,6 +29,8 @@ jobs:
       - run: flutter --version
       - run: flutter pub get
       - run: flutter build web --web-renderer html --base-href /${{ steps.version.outputs.repository }}/
+      - name: Copy static pages
+        run: cp -r public/. build/web/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
