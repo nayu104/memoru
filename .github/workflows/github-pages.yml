@@ -21,7 +21,7 @@ jobs:
 
       - run: flutter --version
       - run: flutter pub get
-      - run: flutter build web --web-renderer html --base-href /memoru/
+      - run: flutter build web --base-href /memoru/
 
       - name: Copy static pages
         run: cp -r public/. build/web/
