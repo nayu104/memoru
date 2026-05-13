@@ -11,28 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
 
-      - name: Repository
-        id: version
-        run: |
-          REPOSITORY=$(echo ${{ github.repository }} | sed -e "s#.*/##")
-          echo ::set-output name=repository::$REPOSITORY
       - name: Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           cache: true
+
       - run: flutter --version
       - run: flutter pub get
-      - run: flutter build web --web-renderer html --base-href /${{ steps.version.outputs.repository }}/
+      - run: flutter build web --web-renderer html --base-href /memoru/
+
       - name: Copy static pages
         run: cp -r public/. build/web/
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
